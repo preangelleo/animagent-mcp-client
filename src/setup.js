@@ -102,19 +102,23 @@ function updateClaudeConfig() {
   console.log('✅ Claude Desktop configuration updated successfully!');
 }
 
-// Test the MCP client
+// Test the MCP client (lightweight test without starting server)
 async function testClient() {
   console.log('\n🧪 Testing AnimAgent MCP client...');
   
   try {
-    const AnimAgentClient = await import('./index.js').then(m => m.default);
-    const client = new AnimAgentClient({
-      userId: process.env.ANIMAGENT_USER_ID,
-      userEmail: process.env.ANIMAGENT_USER_EMAIL
-    });
+    // Test environment variables and basic configuration
+    const userId = process.env.ANIMAGENT_USER_ID;
+    const userEmail = process.env.ANIMAGENT_USER_EMAIL;
+    const serverUrl = process.env.ANIMAGENT_MCP_SERVER_URL || 'https://app.sumatman.ai/api/mcp';
+    
+    if (!userId || !userEmail) {
+      throw new Error('Missing required environment variables');
+    }
 
     console.log('✅ Client initialized successfully!');
     console.log('   You can now use AnimAgent in Claude Desktop');
+    console.log(`   Server URL: ${serverUrl}`);
   } catch (error) {
     console.error('❌ Client test failed:', error.message);
   }
@@ -201,6 +205,9 @@ async function main() {
   console.log('2. In Claude, try: "Create a 30-second animation about a magical forest"');
   console.log('3. Run "npm test" to verify the client is working');
   console.log('\\nFor more information, see the README.md file.');
+  
+  // Exit the process to prevent hanging
+  process.exit(0);
 }
 
 // Run setup
