@@ -2,6 +2,28 @@
 
 A client library for connecting to the AnimAgent MCP (Model Context Protocol) server to create and manage AI-powered story animations.
 
+## 🚀 Quick Install (One Command!)
+
+### macOS/Linux:
+```bash
+git clone https://github.com/preangelleo/animagent-mcp-client.git
+cd animagent-mcp-client
+./install.sh
+```
+
+### Windows:
+```cmd
+git clone https://github.com/preangelleo/animagent-mcp-client.git
+cd animagent-mcp-client
+install.bat
+```
+
+That's it! The installer will:
+- ✅ Check Node.js installation
+- ✅ Install dependencies
+- ✅ Ask for your credentials
+- ✅ Configure Claude Desktop automatically
+
 ## Overview
 
 This project provides a simple client interface to connect with the AnimAgent remote MCP server hosted on AWS. It enables users to:
