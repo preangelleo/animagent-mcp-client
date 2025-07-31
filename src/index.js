@@ -50,32 +50,64 @@ async function callRemoteMCP(method, params = {}) {
   try {
     debug(`Calling remote MCP: ${method}`, params);
     
+    // Build the request body based on the method
+    let requestBody;
+    if (method === 'tools/list') {
+      requestBody = JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'tools/list',
+        id: Date.now(),
+      });
+    } else if (method === 'tools/call') {
+      requestBody = JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'tools/call',
+        params: params,
+        id: Date.now(),
+      });
+    } else {
+      requestBody = JSON.stringify({
+        jsonrpc: '2.0',
+        method,
+        params,
+        id: Date.now(),
+      });
+    }
+    
     const response = await fetch(MCP_SERVER_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Sumatman-User-ID': USER_ID,
+        'X-Sumatman-User-Email': USER_EMAIL,
       },
-      body: JSON.stringify({
-        jsonrpc: '2.0',
-        method,
-        params: {
-          ...params,
-          // Include authentication
-          userId: USER_ID,
-          userEmail: USER_EMAIL,
-        },
-        id: Date.now(),
-      }),
+      body: requestBody,
     });
 
-    const data = await response.json();
-    debug('Remote MCP response:', data);
-
-    if (data.error) {
-      throw new Error(data.error.message || 'Remote MCP error');
+    const text = await response.text();
+    debug('Remote MCP raw response:', text);
+    
+    // Parse newline-delimited JSON responses
+    const lines = text.trim().split('\n');
+    let result = null;
+    
+    for (const line of lines) {
+      if (line.trim()) {
+        try {
+          const data = JSON.parse(line);
+          if (data.error) {
+            throw new Error(data.error.message || 'Remote MCP error');
+          }
+          if (data.result) {
+            result = data.result;
+          }
+        } catch (e) {
+          debug('Failed to parse line:', line, e);
+        }
+      }
     }
-
-    return data.result;
+    
+    return result;
   } catch (error) {
     debug('Remote MCP error:', error);
     throw error;
@@ -160,9 +192,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   debug('Tool call:', request.params.name, request.params.arguments);
 
   try {
+    // Map client tool names to server tool names
+    let toolName = request.params.name;
+    if (toolName === 'create_story_animation') {
+      toolName = 'create_animation_task';
+    } else if (toolName === 'check_task_status') {
+      toolName = 'get_task_details';
+    }
+    
     // Forward the tool call to the remote server
     const result = await callRemoteMCP('tools/call', {
-      name: request.params.name,
+      name: toolName,
       arguments: request.params.arguments,
     });
 
@@ -223,16 +263,46 @@ class AnimAgentClient {
   }
 
   async createStoryAnimation(options) {
+    // Map client options to server parameter names
+    const mappedOptions = {
+      input_story: options.prompt || options.input_story,
+      story_type: options.storyType || options.story_type || 'fairytale_story',
+      video_length_minutes: options.duration || options.video_length_minutes || 30,
+      dimension_type: options.dimensionType || options.dimension_type || 'landscape',
+      voice_language: options.voiceLanguage || options.voice_language || 'english',
+      voice_id: options.voiceId || options.voice_id,
+      illustration_style: options.style || options.illustration_style || 'Japanese Ghibli-inspired Style',
+      audience_age: options.audienceAge || options.audience_age || 'adults',
+      audience_gender: options.audienceGender || options.audience_gender || 'all_genders',
+      audience_location: options.audienceLocation || options.audience_location || 'global',
+      narrator_name: options.narratorName || options.narrator_name,
+      thematic_purpose: options.thematicPurpose || options.thematic_purpose,
+      signature_phrases: options.signaturePhrases || options.signature_phrases,
+      youtube_channel_description: options.youtubeChannelDescription || options.youtube_channel_description,
+      fixed_character_name: options.fixedCharacterName || options.fixed_character_name,
+      copy_to_email: options.copyToEmail || options.copy_to_email,
+      search_keywords: options.searchKeywords || options.search_keywords,
+      system_prompt_story_writing: options.systemPromptStoryWriting || options.system_prompt_story_writing,
+      system_prompt_image_generation: options.systemPromptImageGeneration || options.system_prompt_image_generation,
+    };
+    
+    // Remove undefined values
+    Object.keys(mappedOptions).forEach(key => {
+      if (mappedOptions[key] === undefined) {
+        delete mappedOptions[key];
+      }
+    });
+    
     return callRemoteMCP('tools/call', {
-      name: 'create_story_animation',
-      arguments: options,
+      name: 'create_animation_task',
+      arguments: mappedOptions,
     });
   }
 
   async checkTaskStatus(taskId) {
     return callRemoteMCP('tools/call', {
-      name: 'check_task_status',
-      arguments: { taskId },
+      name: 'get_task_details',
+      arguments: { task_id: taskId },
     });
   }
 }

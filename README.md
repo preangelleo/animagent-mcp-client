@@ -23,7 +23,7 @@ This project provides a simple client interface to connect with the AnimAgent re
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/animagent-mcp-client.git
+git clone https://github.com/preangelleo/animagent-mcp-client.git
 cd animagent-mcp-client
 ```
 
@@ -153,7 +153,7 @@ MIT License - see LICENSE file for details
 ## Support
 
 For issues and questions:
-- GitHub Issues: [Create an issue](https://github.com/yourusername/animagent-mcp-client/issues)
+- GitHub Issues: [Create an issue](https://github.com/preangelleo/animagent-mcp-client/issues)
 - Email: support@sumatman.ai
 
 ## Powered By
