@@ -78,8 +78,8 @@ async function callRemoteMCP(method, params = {}) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Sumatman-User-ID': USER_ID,
-        'X-Sumatman-User-Email': USER_EMAIL,
+        'X-AnimAgent-User-ID': USER_ID,
+        'X-AnimAgent-User-Email': USER_EMAIL,
       },
       body: requestBody,
     });
@@ -135,6 +135,87 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   debug('Tool call:', request.params.name, request.params.arguments);
 
   try {
+    // Local validation for edit_animation_task
+    if (request.params.name === 'edit_animation_task') {
+      const args = request.params.arguments || {};
+      if (!args.task_id || args.task_id.trim() === '') {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: `❌ **Client Validation Error**
+
+🚨 **TASK_ID IS MANDATORY**: You must provide the task_id parameter when editing a task.
+
+📋 **Usage**: Use get_task_details first to find the task_id, then provide it in the edit call:
+\`\`\`
+edit_animation_task({
+  "task_id": "web_1234567890_abc123",
+  ...other fields to change
+})
+\`\`\`
+
+💡 **Tip**: Only provide the fields you want to change - unchanged fields will keep their original values.`,
+            },
+          ],
+        };
+      }
+    }
+
+    // Local validation for repeat_animation_task
+    if (request.params.name === 'repeat_animation_task') {
+      const args = request.params.arguments || {};
+      if (!args.task_id || args.task_id.trim() === '') {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: `❌ **Client Validation Error**
+
+🚨 **TASK_ID IS MANDATORY**: You must provide the task_id parameter when repeating a task.
+
+📋 **Usage**: Use get_task_details first to find a completed task_id, then provide it in the repeat call:
+\`\`\`
+repeat_animation_task({
+  "task_id": "web_1234567890_abc123",
+  "input_story": "Your new story content here",
+  "code_name": "New unique task title"
+})
+\`\`\`
+
+💡 **Tip**: The task_id must be from a COMPLETED task to copy its settings. You also need to provide new input_story and code_name.`,
+            },
+          ],
+        };
+      }
+    }
+
+    // Local validation for delete_animation_task
+    if (request.params.name === 'delete_animation_task') {
+      const args = request.params.arguments || {};
+      if (!args.task_id || args.task_id.trim() === '') {
+        return {
+          content: [
+            {
+              type: 'text',
+              text: `❌ **Client Validation Error**
+
+🚨 **TASK_ID IS MANDATORY**: You must provide the task_id parameter when deleting a task.
+
+📋 **Usage**: Use get_task_details first to find the task_id, then provide it in the delete call:
+\`\`\`
+delete_animation_task({
+  "task_id": "web_1234567890_abc123"
+})
+\`\`\`
+
+💡 **Tip**: Only tasks with "pending" status can be deleted. The server will reject deletion of completed, processing, or failed tasks.`,
+            },
+          ],
+        };
+      }
+    }
+
     // Pure passthrough - forward exactly what we receive
     const result = await callRemoteMCP('tools/call', {
       name: request.params.name,

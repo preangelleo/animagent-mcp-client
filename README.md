@@ -26,14 +26,16 @@ That's it! The installer will:
 
 ## Overview
 
-This project provides a lightweight passthrough client that bridges Claude Desktop with the AnimAgent remote MCP server. The client acts as a pure proxy, forwarding all requests to the server without any local business logic or validation.
+This project provides a lightweight passthrough client that bridges Claude Desktop with the AnimAgent remote MCP server. The client includes smart local validation to catch common errors before they reach the server.
 
-**Design Philosophy**: The client is intentionally kept minimal - all tool definitions, validations, and business logic reside on the server side. This ensures consistency and allows server-side updates without requiring client updates.
+**⚡ Enhanced with Client-Side Validation**: While maintaining the core passthrough design, the client now performs critical parameter validation for edit, repeat, and delete operations. This provides instant feedback and prevents common user errors, while still keeping all business logic on the server side.
 
 It enables users to:
 
 - Create AI-generated story animations
-- Monitor task status and progress
+- Monitor task status and progress  
+- Edit, repeat, and delete animation tasks with smart validation
+- Get instant error feedback for missing required parameters
 - Integrate animation capabilities into Claude Desktop or other MCP-compatible environments
 
 ## Prerequisites
@@ -106,13 +108,29 @@ Once configured, you can use natural language in Claude Desktop:
 This client acts as a bridge between Claude Desktop and the AnimAgent MCP server. When you use animation commands in Claude:
 
 1. Claude Desktop sends the request to this local client via MCP protocol
-2. The client forwards the request to the AnimAgent server
-3. The server processes the animation task
-4. Results are returned back through the same chain
+2. **⚡ NEW**: Client performs local validation for critical parameters (edit/repeat/delete operations)
+3. If validation passes, the client forwards the request to the AnimAgent server
+4. The server processes the animation task
+5. Results are returned back through the same chain
 
-**Note**: All parameters and options are defined by the server. The client simply passes through your requests without modification.
+**Dual-Layer Validation**: 
+- **Client-Side**: Catches missing `task_id` parameters instantly with helpful error messages
+- **Server-Side**: Handles business logic validation (task status, permissions, etc.)
+
+**Note**: All tool definitions and business parameters are still defined by the server. The client only validates critical required fields.
 
 ## Troubleshooting
+
+### Client Validation Errors ⚡ New
+
+**"❌ Client Validation Error - TASK_ID IS MANDATORY"**
+- **Cause**: Trying to edit, repeat, or delete a task without providing the `task_id` parameter
+- **Solution**: Always use `get_task_details` first to find the task ID, then provide it in your request
+- **Example**: 
+  ```
+  "First, check my task details for task_id: web_1234567890_abc123"
+  "Now edit that task to change the story to: [new story content]"
+  ```
 
 ### Connection Issues
 - Ensure your credentials in `.env` are correct
@@ -123,6 +141,13 @@ This client acts as a bridge between Claude Desktop and the AnimAgent MCP server
 - Make sure Claude Desktop is properly installed
 - Run `npm run setup` again if configuration issues persist
 - Check Claude Desktop logs for MCP connection errors
+
+### Advanced Troubleshooting
+
+**Local vs Server Errors**:
+- **Client errors** (⚡): Show "Client Validation Error" - these are caught locally
+- **Server errors**: Show "Backend Error" - these come from the remote server
+- **Network errors**: Show "Connection Error" - these indicate connectivity issues
 
 ## Contributing
 
@@ -144,6 +169,25 @@ For issues and questions:
 - GitHub Issues: [Create an issue](https://github.com/preangelleo/animagent-mcp-client/issues)
 - Email: atmansum@gmail.com
 - Website: https://app.sumatman.ai
+
+## Features
+
+### ⚡ Smart Local Validation (v2.1.0)
+- **Instant Error Detection**: Catches missing `task_id` parameters before sending requests
+- **Helpful Error Messages**: Provides clear usage examples and troubleshooting tips
+- **Reduced Network Traffic**: Invalid requests blocked locally, saving bandwidth
+- **Better User Experience**: No waiting for server roundtrips on obvious errors
+
+### 🔧 Parameter Mapping Fix (Latest Update)
+- **Fully Working Edit Operations**: Edit, repeat, and delete functions now work correctly
+- **Fixed Parameter Mapping**: Resolved backend parameter name mapping issues
+- **Reliable Task Management**: All task operations (create/edit/repeat/delete) fully functional
+- **Consistent Behavior**: Same parameter handling across all operation modes
+
+### 🔄 Pure Passthrough Design
+- **Server-First Architecture**: All business logic and tool definitions from server
+- **Automatic Updates**: New server features available without client updates
+- **Dual-Layer Validation**: Client validates required fields, server handles business logic
 
 ## Powered By
 

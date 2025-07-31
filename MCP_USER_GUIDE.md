@@ -183,13 +183,26 @@ Query task status and details
 "Check my animation task progress, task ID: task_abc123"
 ```
 
-### 3. edit_animation_task
-Modify existing tasks
+### 3. edit_animation_task ⚡ *Enhanced Validation*
+Modify existing tasks  
+**🔒 Critical Requirement**: Must provide `task_id` parameter - client validates this locally
 
-### 4. repeat_animation_task
+### 4. repeat_animation_task ⚡ *Enhanced Validation*
 Create variations based on completed tasks
+**🔒 Critical Requirement**: Must provide `task_id` parameter - client validates this locally
+
+### 5. delete_animation_task ⚡ *Enhanced Validation*  
+Delete pending animation tasks
+**🔒 Critical Requirement**: Must provide `task_id` parameter - client validates this locally
 
 ## ⚠️ Important Notes
+
+### ⚡ Task ID Requirements (Critical for Task Operations)
+- **edit_animation_task**: MUST provide `task_id` of the task to modify
+- **repeat_animation_task**: MUST provide `task_id` of completed task to copy settings from
+- **delete_animation_task**: MUST provide `task_id` of pending task to delete
+- **Local Validation**: Client automatically checks for missing `task_id` before sending to server
+- **Best Practice**: Always use `get_task_details` first to find the correct task ID
 
 ### Security Reminders
 - **Never share your User ID and email**
@@ -201,6 +214,22 @@ Create variations based on completed tasks
 - You'll be prompted to top up if balance is insufficient
 
 ## 🔧 Troubleshooting
+
+### ⚡ Client Validation Errors (New - Caught Locally)
+
+**"❌ Client Validation Error - TASK_ID IS MANDATORY"**
+- **When it appears**: Trying to edit, repeat, or delete without providing `task_id`
+- **Why it happens**: AI assistant forgot to include the required task ID parameter
+- **How to fix**: 
+  1. First use: `"Check my task details for task ID: [your_task_id]"`
+  2. Then retry with: `"Edit that task to change [specific field]"`
+- **Example conversation**:
+  ```
+  User: "Edit my animation to make it 15 minutes long"
+  AI: ❌ Client Validation Error - TASK_ID IS MANDATORY
+  User: "First check task details for task_abc123, then edit it to 15 minutes"
+  AI: ✅ Successfully edited task
+  ```
 
 ### Connection Issues
 1. Check if User ID and email are correct
@@ -220,6 +249,11 @@ Create variations based on completed tasks
 - **invalid duration**: Must be multiples of 5 (5-60 minutes)
 - **format error**: Must be landscape or portrait only
 
+### Task Management Issues ⚡ Enhanced
+- **Missing task_id error**: Now caught locally with helpful guidance
+- **Edit failed silently**: Fixed through better AI guidance and validation
+- **Wrong task status**: Server still validates business rules (pending/completed status)
+
 ## 📞 Getting Help
 
 - **Technical Support**: Visit [https://app.sumatman.ai](https://app.sumatman.ai)  
@@ -228,6 +262,18 @@ Create variations based on completed tasks
 - **Live Demo**: https://app.sumatman.ai
 
 ## 🌟 Advanced Features
+
+### ⚡ Smart Error Prevention (v2.1.0)
+- **Local Validation**: Client catches missing parameters before server contact
+- **Instant Feedback**: No waiting for server roundtrip on obvious errors  
+- **Usage Guidance**: Error messages include exact syntax examples
+- **Dual-Layer Protection**: Client validates required fields, server validates business logic
+
+### 🔧 Latest Technical Improvements (July 2025)
+- **Fixed Parameter Mapping**: Resolved critical backend parameter mapping issues
+- **Fully Working Edit Operations**: Edit, repeat, and delete now work reliably
+- **Consistent Parameter Handling**: Unified parameter conversion across all operation modes
+- **Enhanced Reliability**: All task management operations fully tested and verified
 
 ### Comics Story Special Features
 When selecting `comics_story`, you can:
@@ -247,8 +293,14 @@ For AI readable fields, you can:
 - Combine multiple style elements
 - Create unique visual effects
 
+### Task Management Best Practices ⚡ Updated
+- **Always start with get_task_details** when working with existing tasks
+- **Provide task_id explicitly** for edit/repeat/delete operations  
+- **Use descriptive language** when asking AI to perform task operations
+- **Check task status** before attempting edits (only "pending" tasks can be edited)
+
 ---
 
 **🎨 Start your AI animation creation journey!** ✨
 
-*Last updated: July 31, 2025*
+*Last updated: July 31, 2025 - v2.1.1 with Enhanced Client-Side Validation & Fixed Parameter Mapping*
