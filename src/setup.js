@@ -1,10 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { execSync } = require('child_process');
-const dotenv = require('dotenv');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import { execSync } from 'child_process';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
@@ -102,7 +107,7 @@ async function testClient() {
   console.log('\n🧪 Testing AnimAgent MCP client...');
   
   try {
-    const AnimAgentClient = require('./index.js');
+    const AnimAgentClient = await import('./index.js').then(m => m.default);
     const client = new AnimAgentClient({
       userId: process.env.ANIMAGENT_USER_ID,
       userEmail: process.env.ANIMAGENT_USER_EMAIL
@@ -121,8 +126,8 @@ function createTestScript() {
   
   const testScript = `#!/usr/bin/env node
 
-const AnimAgentClient = require('./index.js');
-const dotenv = require('dotenv');
+import AnimAgentClient from './index.js';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();

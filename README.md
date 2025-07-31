@@ -98,7 +98,7 @@ Once configured, you can use natural language in Claude Desktop:
 ## Configuration
 
 The client connects to the AnimAgent MCP server at:
-- Production: `https://api.sumatman.ai/api/mcp`
+- Production: `https://app.sumatman.ai/api/mcp`
 
 ## API Reference
 

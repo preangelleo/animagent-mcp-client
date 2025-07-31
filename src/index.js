@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-const { Server } from '@modelcontextprotocol/sdk/server/index.js';
-const { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-const {
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-const fetch = require('node-fetch').default;
-const dotenv = require('dotenv');
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
 
 // Load environment variables
 dotenv.config();
 
 // Configuration
-const MCP_SERVER_URL = process.env.ANIMAGENT_MCP_SERVER_URL || 'https://api.sumatman.ai/api/mcp';
+const MCP_SERVER_URL = process.env.ANIMAGENT_MCP_SERVER_URL || 'https://app.sumatman.ai/api/mcp';
 const USER_ID = process.env.ANIMAGENT_USER_ID;
 const USER_EMAIL = process.env.ANIMAGENT_USER_EMAIL;
 const DEBUG = process.env.DEBUG === 'true';
@@ -307,4 +307,4 @@ class AnimAgentClient {
   }
 }
 
-module.exports = AnimAgentClient;
+export default AnimAgentClient;
