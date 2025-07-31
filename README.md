@@ -73,6 +73,10 @@ ANIMAGENT_USER_ID=your_user_id_here
 ANIMAGENT_USER_EMAIL=your_email_here
 ```
 
+**Where to find your credentials:**
+- **Email**: The email you use to log in to https://app.sumatman.ai
+- **User ID**: After logging in to https://app.sumatman.ai, you can find and copy your User ID from the dashboard
+
 ### 4. First-Time Setup
 
 Run the setup script to configure Claude Desktop:
@@ -83,11 +87,6 @@ npm run setup
 
 This will automatically configure your Claude Desktop to connect with the AnimAgent MCP server.
 
-### 5. Test the Connection
-
-```bash
-npm test
-```
 
 ## Usage
 
@@ -101,10 +100,6 @@ Once configured, you can use natural language in Claude Desktop:
 "Check the status of my animation task"
 ```
 
-## Configuration
-
-The client connects to the AnimAgent MCP server at:
-- Production: `https://app.sumatman.ai/api/mcp`
 
 ## How It Works
 
