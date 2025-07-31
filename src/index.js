@@ -119,71 +119,14 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   debug('Listing tools');
   
   try {
-    // Get tools from remote server
+    // Get tools from remote server - always use remote as source of truth
     const remoteTools = await callRemoteMCP('tools/list');
-    
-    // Add our authentication to each tool
-    const tools = remoteTools.tools.map(tool => ({
-      ...tool,
-      description: tool.description + '\\n\\nNote: This tool connects to the AnimAgent cloud service.',
-    }));
-
-    return { tools };
+    return { tools: remoteTools.tools || [] };
   } catch (error) {
-    // Fallback to hardcoded tools if remote is unavailable
-    return {
-      tools: [
-        {
-          name: 'create_story_animation',
-          description: 'Create an AI-generated story animation video\\n\\nNote: This tool connects to the AnimAgent cloud service.',
-          inputSchema: {
-            type: 'object',
-            properties: {
-              prompt: {
-                type: 'string',
-                description: 'The story prompt for the animation',
-              },
-              duration: {
-                type: 'integer',
-                description: 'Duration of the video in seconds (default: 30)',
-                minimum: 10,
-                maximum: 300,
-              },
-              style: {
-                type: 'string',
-                description: 'Animation style (cartoon, realistic, anime, etc.)',
-                enum: ['cartoon', 'realistic', 'anime', 'watercolor', 'sketch'],
-              },
-              voiceType: {
-                type: 'string',
-                description: 'Voice type for narration',
-                enum: ['male', 'female', 'child', 'narrator'],
-              },
-              musicStyle: {
-                type: 'string',
-                description: 'Background music style',
-                enum: ['adventure', 'calm', 'dramatic', 'happy', 'mysterious', 'none'],
-              },
-            },
-            required: ['prompt'],
-          },
-        },
-        {
-          name: 'check_task_status',
-          description: 'Check the status of an animation task\\n\\nNote: This tool connects to the AnimAgent cloud service.',
-          inputSchema: {
-            type: 'object',
-            properties: {
-              taskId: {
-                type: 'string',
-                description: 'The task ID to check',
-              },
-            },
-            required: ['taskId'],
-          },
-        },
-      ],
-    };
+    debug('Failed to get tools from remote server:', error);
+    // Return empty tools list if cannot connect to server
+    // This forces the client to be a pure passthrough
+    return { tools: [] };
   }
 });
 
@@ -192,17 +135,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   debug('Tool call:', request.params.name, request.params.arguments);
 
   try {
-    // Map client tool names to server tool names
-    let toolName = request.params.name;
-    if (toolName === 'create_story_animation') {
-      toolName = 'create_animation_task';
-    } else if (toolName === 'check_task_status') {
-      toolName = 'get_task_details';
-    }
-    
-    // Forward the tool call to the remote server
+    // Pure passthrough - forward exactly what we receive
     const result = await callRemoteMCP('tools/call', {
-      name: toolName,
+      name: request.params.name,
       arguments: request.params.arguments,
     });
 
@@ -263,43 +198,15 @@ class AnimAgentClient {
   }
 
   async createStoryAnimation(options) {
-    // Map client options to server parameter names
-    const mappedOptions = {
-      input_story: options.prompt || options.input_story,
-      story_type: options.storyType || options.story_type || 'fairytale_story',
-      video_length_minutes: options.duration || options.video_length_minutes || 30,
-      dimension_type: options.dimensionType || options.dimension_type || 'landscape',
-      voice_language: options.voiceLanguage || options.voice_language || 'english',
-      voice_id: options.voiceId || options.voice_id,
-      illustration_style: options.style || options.illustration_style || 'Japanese Ghibli-inspired Style',
-      audience_age: options.audienceAge || options.audience_age || 'adults',
-      audience_gender: options.audienceGender || options.audience_gender || 'all_genders',
-      audience_location: options.audienceLocation || options.audience_location || 'global',
-      narrator_name: options.narratorName || options.narrator_name,
-      thematic_purpose: options.thematicPurpose || options.thematic_purpose,
-      signature_phrases: options.signaturePhrases || options.signature_phrases,
-      youtube_channel_description: options.youtubeChannelDescription || options.youtube_channel_description,
-      fixed_character_name: options.fixedCharacterName || options.fixed_character_name,
-      copy_to_email: options.copyToEmail || options.copy_to_email,
-      search_keywords: options.searchKeywords || options.search_keywords,
-      system_prompt_story_writing: options.systemPromptStoryWriting || options.system_prompt_story_writing,
-      system_prompt_image_generation: options.systemPromptImageGeneration || options.system_prompt_image_generation,
-    };
-    
-    // Remove undefined values
-    Object.keys(mappedOptions).forEach(key => {
-      if (mappedOptions[key] === undefined) {
-        delete mappedOptions[key];
-      }
-    });
-    
+    // Pure passthrough - let server handle all validation and defaults
     return callRemoteMCP('tools/call', {
       name: 'create_animation_task',
-      arguments: mappedOptions,
+      arguments: options,
     });
   }
 
   async checkTaskStatus(taskId) {
+    // Pure passthrough
     return callRemoteMCP('tools/call', {
       name: 'get_task_details',
       arguments: { task_id: taskId },

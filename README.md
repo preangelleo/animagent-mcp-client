@@ -26,7 +26,11 @@ That's it! The installer will:
 
 ## Overview
 
-This project provides a simple client interface to connect with the AnimAgent remote MCP server hosted on AWS. It enables users to:
+This project provides a lightweight passthrough client that bridges Claude Desktop with the AnimAgent remote MCP server. The client acts as a pure proxy, forwarding all requests to the server without any local business logic or validation.
+
+**Design Philosophy**: The client is intentionally kept minimal - all tool definitions, validations, and business logic reside on the server side. This ensures consistency and allows server-side updates without requiring client updates.
+
+It enables users to:
 
 - Create AI-generated story animations
 - Monitor task status and progress
@@ -177,7 +181,8 @@ MIT License - see LICENSE file for details
 For issues and questions:
 - GitHub Issues: [Create an issue](https://github.com/preangelleo/animagent-mcp-client/issues)
 - Email: support@sumatman.ai
+- Website: https://app.sumatman.ai
 
 ## Powered By
 
-This client connects to the AnimAgent service by [Sumatman AI](https://sumatman.ai), bringing AI-powered story animation capabilities to developers worldwide.
+This client connects to the AnimAgent service by [Sumatman AI](https://app.sumatman.ai), bringing AI-powered story animation capabilities to developers worldwide.
