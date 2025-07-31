@@ -91,26 +91,6 @@ npm test
 
 ## Usage
 
-### As a Standalone Client
-
-```javascript
-const AnimAgentClient = require('animagent-mcp-client');
-
-const client = new AnimAgentClient({
-  userId: process.env.ANIMAGENT_USER_ID,
-  userEmail: process.env.ANIMAGENT_USER_EMAIL
-});
-
-// Create a new animation
-const task = await client.createStoryAnimation({
-  prompt: "A brave knight rescuing a dragon from a princess",
-  duration: 30,
-  style: "cartoon"
-});
-
-// Check task status
-const status = await client.checkTaskStatus(task.taskId);
-```
 
 ### With Claude Desktop
 
@@ -126,29 +106,16 @@ Once configured, you can use natural language in Claude Desktop:
 The client connects to the AnimAgent MCP server at:
 - Production: `https://app.sumatman.ai/api/mcp`
 
-## API Reference
+## How It Works
 
-### Methods
+This client acts as a bridge between Claude Desktop and the AnimAgent MCP server. When you use animation commands in Claude:
 
-#### `createStoryAnimation(options)`
-Creates a new story animation task.
+1. Claude Desktop sends the request to this local client via MCP protocol
+2. The client forwards the request to the AnimAgent server
+3. The server processes the animation task
+4. Results are returned back through the same chain
 
-**Parameters:**
-- `prompt` (string, required): The story prompt
-- `duration` (number, optional): Video duration in seconds (default: 30)
-- `style` (string, optional): Animation style (default: "cartoon")
-- `voiceType` (string, optional): Voice type for narration
-- `musicStyle` (string, optional): Background music style
-
-**Returns:** Task object with `taskId`
-
-#### `checkTaskStatus(taskId)`
-Checks the status of an animation task.
-
-**Parameters:**
-- `taskId` (string, required): The task ID to check
-
-**Returns:** Status object with progress information
+**Note**: All parameters and options are defined by the server. The client simply passes through your requests without modification.
 
 ## Troubleshooting
 
@@ -180,7 +147,7 @@ MIT License - see LICENSE file for details
 
 For issues and questions:
 - GitHub Issues: [Create an issue](https://github.com/preangelleo/animagent-mcp-client/issues)
-- Email: support@sumatman.ai
+- Email: atmansum@gmail.com
 - Website: https://app.sumatman.ai
 
 ## Powered By
