@@ -41,9 +41,25 @@ function validateEnv() {
   const userId = process.env.ANIMAGENT_USER_ID;
   const userEmail = process.env.ANIMAGENT_USER_EMAIL;
 
-  if (!userId || !userEmail) {
-    console.error('❌ Error: Missing required environment variables.');
-    console.error('   Please ensure ANIMAGENT_USER_ID and ANIMAGENT_USER_EMAIL are set in your .env file.');
+  if (!userId || !userEmail || userId === 'your_user_id_here' || userEmail === 'your_email@example.com') {
+    console.error('❌ Error: Environment variables need to be configured.');
+    console.error('');
+    console.error('   Please update your .env file with your actual values:');
+    console.error('');
+    if (!userId || userId === 'your_user_id_here') {
+      console.error('   1. ANIMAGENT_USER_ID: Get this from your dashboard at https://app.sumatman.ai');
+      console.error('      • Login to https://app.sumatman.ai');
+      console.error('      • Go to your account settings or dashboard');
+      console.error('      • Copy your User ID');
+      console.error('');
+    }
+    if (!userEmail || userEmail === 'your_email@example.com') {
+      console.error('   2. ANIMAGENT_USER_EMAIL: Use the email you login with at https://app.sumatman.ai');
+      console.error('      • This should be the same email you use to access your account');
+      console.error('      • Example: yourname@gmail.com');
+      console.error('');
+    }
+    console.error('   After updating your .env file, run the installer again.');
     process.exit(1);
   }
 
@@ -118,7 +134,6 @@ async function testClient() {
 
     console.log('✅ Client initialized successfully!');
     console.log('   You can now use AnimAgent in Claude Desktop');
-    console.log(`   Server URL: ${serverUrl}`);
   } catch (error) {
     console.error('❌ Client test failed:', error.message);
   }
