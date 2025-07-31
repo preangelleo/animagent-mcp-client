@@ -1,258 +1,254 @@
-# Sumatman AI Animation MCP Server - 完整使用指南
+# Animagent MCP Server - User Guide
 
-## 🎯 什么是Sumatman MCP Server？
+## 🎯 What is Animagent MCP Server?
 
-Sumatman AI Animation MCP Server 是**世界首个AI代理故事动画MCP服务器**。它允许你通过Claude Code、ChatGPT等AI助手直接创建专业的动画故事视频，无需访问网站界面。
+The Animagent MCP Server is the **world's first AI agent MCP server for story animation**. It allows you to create professional animated story videos directly through AI assistants like Claude Code, ChatGPT, and others, without needing to access the web interface.
 
-## 🚀 快速配置
+## 🚀 Quick Setup
 
-### 步骤 1: 获取用户凭证
+### Step 1: Get Your User Credentials
 
-1. 访问 [https://app.sumatman.ai/developer](https://app.sumatman.ai/developer)
-2. 登录你的账户
-3. 记录你的 `User ID` 和注册邮箱
+1. Visit [https://app.sumatman.ai](https://app.sumatman.ai)
+2. Log in to your account
+3. Go to the **Welcome page** to find your `User ID`
+4. Note your registered email address
 
-### 步骤 2: 配置Claude Code
+### Step 2: Configure Claude Code
 
-**推荐方法（使用本项目安装脚本）**：
+**Recommended Method (Using Project Installer)**:
 ```bash
-# 克隆项目并运行自动安装
+# Clone the project and run automatic installation
 git clone https://github.com/preangelleo/animagent-mcp-client.git
 cd animagent-mcp-client
 ./install.sh  # macOS/Linux
-# 或 install.bat  # Windows
+# or install.bat  # Windows
 ```
 
-**手动配置方法（如果使用mcp-remote）**：
+**Manual Configuration Method (if using mcp-remote)**:
 ```bash
-claude mcp add animagent-mcp-client \
-  -e ANIMAGENT_USER_ID=你的用户ID \
-  -e ANIMAGENT_USER_EMAIL=你的邮箱地址 \
+claude mcp add animagent-mcp-server \
+  -e ANIMAGENT_USER_ID=your-user-id \
+  -e ANIMAGENT_USER_EMAIL=your-email@example.com \
   -- npx mcp-remote https://app.sumatman.ai/api/mcp
 ```
 
-### 步骤 3: 验证连接
+### Step 3: Verify Connection
 
-运行以下命令检查连接状态：
+Run the following command to check connection status:
 ```bash
 claude mcp list
 ```
 
-你应该看到：
+You should see:
 ```
-sumatman-ai-animation: npx mcp-remote https://app.sumatman.ai/api/mcp - ✓ Connected
+animagent-mcp-server: npx mcp-remote https://app.sumatman.ai/api/mcp - ✓ Connected
 ```
 
-## 🎬 创建动画的完整流程
+## 🎬 Complete Animation Creation Process
 
-### 🔒 必须确认的参数（按顺序）
+### 🔒 Required Parameters (In Order)
 
-AI助手会按以下顺序询问这些**关键参数**：
+AI assistants will ask for these **critical parameters** in the following order:
 
-#### 1. 📚 故事类型 (STORY_TYPE) - **最重要，必须首先选择**
+#### 1. 📚 Story Type (STORY_TYPE) - **Most Important, Must Ask First**
 
-选择以下13种故事类型之一（**必须精确拼写**）：
-- `fairytale_story` - 🧚‍♀️ 童话故事
-- `educational_story` - 📚 教育故事  
-- `historical_story` - 🏛️ 历史故事
-- `sci_fi_story` - 🚀 科幻故事
-- `fantasy_story` - 🐉 奇幻故事
-- `adventure_story` - 🗺️ 冒险故事
-- `romantic_story` - 💕 爱情故事
-- `cinematic_story` - 🎬 电影风格
-- `bible_story` - ✝️ 圣经故事
-- `poetry_story` - ✍️ 诗歌故事
-- `lyric_story` - 🎵 歌词故事
-- `comics_story` - 💥 漫画故事（**特殊**：可以上传固定角色形象）
-- `book_story` - 📖 书籍改编
+Choose one of the following 13 story types (**must be spelled exactly**):
+- `fairytale_story` - 🧚‍♀️ Fairytale Stories
+- `educational_story` - 📚 Educational Stories  
+- `historical_story` - 🏛️ Historical Stories
+- `sci_fi_story` - 🚀 Science Fiction
+- `fantasy_story` - 🐉 Fantasy Stories
+- `adventure_story` - 🗺️ Adventure Stories
+- `romantic_story` - 💕 Romance Stories
+- `cinematic_story` - 🎬 Cinematic Style
+- `bible_story` - ✝️ Bible Stories
+- `poetry_story` - ✍️ Poetry Stories
+- `lyric_story` - 🎵 Lyrical Stories
+- `comics_story` - 💥 Comic Stories (**Special**: allows fixed character uploads)
+- `book_story` - 📖 Book Adaptations
 
-**⚠️ 重要**：每种故事类型都有专门的系统提示词，拼写错误会导致任务失败！
+**⚠️ Important**: Each story type has specific system prompts, spelling errors will cause task failure!
 
-#### 2. 🗣️ 故事语言 (VOICE_LANGUAGE)
+#### 2. 🗣️ Story Language (VOICE_LANGUAGE)
 
-选择故事和旁白的语言：
-- `english` - 英语
-- `chinese` - 中文
-- `spanish` - 西班牙语
-- `french` - 法语
-- 以及其他支持的语言
+Choose the language for story and narration:
+- `english` - English
+- `chinese` - Chinese
+- `spanish` - Spanish
+- `french` - French
+- And other supported languages
 
-**💡 提示**：即使你用中文和AI聊天，也可能想要英文动画！
+**💡 Tip**: Even if you chat with AI in Chinese, you might want an English animation!
 
-#### 3. ⏱️ 视频时长 (VIDEO_DURATION)
+#### 3. ⏱️ Video Duration (VIDEO_DURATION)
 
-选择视频长度（分钟），必须是5的倍数：
+Choose video length (minutes), must be multiples of 5:
 - 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60
-- **默认推荐**：10分钟
+- **Default recommended**: 10 minutes
 
-#### 4. 📱 视频格式 (DIMENSION_TYPE)
+#### 4. 📱 Video Format (DIMENSION_TYPE)
 
-选择视频方向：
-- `landscape` - 横屏（16:9，适合电脑/电视）
-- `portrait` - 竖屏（9:16，适合手机）
+Choose video orientation:
+- `landscape` - Horizontal (16:9, suitable for computers/TV)
+- `portrait` - Vertical (9:16, suitable for mobile phones)
 
-### 🤖 可选的AI可读参数
+### 🤖 Optional AI Readable Parameters
 
-这些参数可以用**自然语言**描述，不限于固定选项：
+These parameters can be described using **natural language**, not limited to fixed options:
 
-#### 5. 🎨 插画风格 (ILLUSTRATION_STYLE)
+#### 5. 🎨 Illustration Style (ILLUSTRATION_STYLE)
 
-**预设风格**：
-- "Epic Cinematic Matte Painting" - 史诗电影风格
-- "Stage Theatre Illustration" - 舞台剧风格
-- "Silk Scroll Miniature Painting" - 丝绸卷轴画
-- "Japanese Ghibli-inspired Style" - 宫崎骏风格（默认）
-- "Silhouette Shadow Drama Style" - 皮影戏风格
-- "Mythological Chinese Painting" - 中国神话画风
-- "Fantasy Realism with Chinese Elements" - 中式奇幻写实
-- "Modern Cinematic Illustration" - 现代电影插画
+**Predefined Styles**:
+- "Epic Cinematic Matte Painting" - Epic cinematic style
+- "Stage Theatre Illustration" - Theatrical style
+- "Silk Scroll Miniature Painting" - Traditional silk scroll art
+- "Japanese Ghibli-inspired Style" - Studio Ghibli style (default)
+- "Silhouette Shadow Drama Style" - Shadow puppet style
+- "Mythological Chinese Painting" - Chinese mythology art
+- "Fantasy Realism with Chinese Elements" - Eastern fantasy realism
+- "Modern Cinematic Illustration" - Contemporary film illustration
 
-**自定义风格**：任何GPT能理解的艺术风格
-- 例如："水彩画风格"、"漫画书风格"、"照片写实风格"、"动漫风格"
+**Custom Styles**: Any GPT-recognizable art style
+- Examples: "watercolor style", "comic book style", "photorealistic style", "anime style"
 
-#### 6. 👶 目标年龄 (AUDIENCE_AGE)
+#### 6. 👶 Target Age (AUDIENCE_AGE)
 
-**预设选项**：
-- `toddlers` (1-3岁)、`preschool` (4-5岁)、`children` (6-12岁)
-- `teens` (13-17岁)、`young_adults` (18-25岁)、`adults` (26-64岁)
-- `seniors` (65岁以上)
+**Predefined Options**:
+- `toddlers` (1-3 years), `preschool` (4-5 years), `children` (6-12 years)
+- `teens` (13-17 years), `young_adults` (18-25 years), `adults` (26-64 years)
+- `seniors` (65+ years)
 
-**自然语言**：
-- "8-10岁的孩子"、"青少年"、"老年人"等
+**Natural Language**:
+- "kids aged 8-10", "teenagers", "elderly people", etc.
 
-#### 7. 👫 性别导向 (AUDIENCE_GENDER)
+#### 7. 👫 Gender Focus (AUDIENCE_GENDER)
 
-**预设选项**：`all_genders`、`male`、`female`
+**Predefined Options**: `all_genders`, `male`, `female`
 
-**自然语言**：
-- "年轻女性"、"男孩子"、"成熟男性"等
+**Natural Language**:
+- "young women", "boys", "mature men", etc.
 
-#### 8. 🌍 文化背景 (AUDIENCE_LOCATION)
+#### 8. 🌍 Cultural Background (AUDIENCE_LOCATION)
 
-**预设选项**：
-- `global`、`western`、`east_asian`、`islamic`、`christian` 等
+**Predefined Options**:
+- `global`, `western`, `east_asian`, `islamic`, `christian`, etc.
 
-**自然语言**：
-- "中世纪欧洲风格"、"现代亚洲风格"、"传统非洲风格"等
+**Natural Language**:
+- "medieval European style", "modern Asian style", "traditional African style", etc.
 
-## 📝 使用示例
+## 📝 Usage Examples
 
-### 示例 1: 基础动画创建
+### Example 1: Basic Animation Creation
 ```
-用户: "我想创建一个关于友谊的温馨故事"
+User: "I want to create a heartwarming story about friendship"
 
-AI助手会询问：
-1. "您想要什么类型的故事？" → 选择 fairytale_story
-2. "故事用什么语言？" → 选择 chinese  
-3. "视频多长时间？" → 选择 10分钟
-4. "横屏还是竖屏？" → 选择 landscape
-5. 然后开始创建任务
-```
-
-### 示例 2: 高级定制动画
-```
-用户: "制作一个科幻故事，关于机器人帮助人类探索宇宙"
-
-AI助手确认参数：
-- 故事类型：sci_fi_story
-- 语言：english  
-- 时长：15分钟
-- 格式：landscape
-- 插画风格："Modern Cinematic Illustration"
-- 目标受众："teenagers"
+AI assistant will ask:
+1. "What type of story would you like?" → Choose fairytale_story
+2. "What language for the story?" → Choose english  
+3. "How long should the video be?" → Choose 10 minutes
+4. "Landscape or portrait format?" → Choose landscape
+5. Then start creating the task
 ```
 
-### 示例 3: 漫画角色故事
+### Example 2: Advanced Custom Animation
 ```
-用户: "用我的角色创建一个漫画故事"
+User: "Create a sci-fi story about robots helping humans explore the universe"
 
-AI助手会选择：
-- 故事类型：comics_story （支持固定角色上传）
-- 其他参数正常询问...
+AI assistant confirms parameters:
+- Story type: sci_fi_story
+- Language: english  
+- Duration: 15 minutes
+- Format: landscape
+- Illustration style: "Modern Cinematic Illustration"
+- Target audience: "teenagers"
 ```
 
-## 🛠️ 可用工具
+### Example 3: Comics Character Story
+```
+User: "Create a comic story using my character"
+
+AI assistant will choose:
+- Story type: comics_story (supports fixed character uploads)
+- Other parameters asked normally...
+```
+
+## 🛠️ Available Tools
 
 ### 1. create_animation_task
-创建新的动画任务
+Create new animation tasks
 
 ### 2. get_task_details  
-查询任务状态和详情
+Query task status and details
 ```
-"检查我的动画任务进度，任务ID：task_abc123"
+"Check my animation task progress, task ID: task_abc123"
 ```
 
 ### 3. edit_animation_task
-修改现有任务
+Modify existing tasks
 
 ### 4. repeat_animation_task
-基于已完成任务创建变体
+Create variations based on completed tasks
 
-## ⚠️ 重要注意事项
+## ⚠️ Important Notes
 
-### 安全提醒
-- **永远不要分享你的用户ID和邮箱**
-- 环境变量安全传输，AI助手看不到你的凭证
+### Security Reminders
+- **Never share your User ID and email**
+- Environment variables are transmitted securely, AI assistants cannot see your credentials
 
-### 计费说明
-- 每个动画任务消耗相应积分
-- 创建前会显示所需积分数量
-- 余额不足时会提示充值
+### Billing Information
+- Each animation task consumes corresponding credits
+- Required credits will be displayed before creation
+- You'll be prompted to top up if balance is insufficient
 
-### 技术限制
-- **处理时间**：通常5-15分钟
-- **并发限制**：根据订阅计划
-- **文件大小**：根据视频时长自动优化
+## 🔧 Troubleshooting
 
-## 🔧 故障排除
+### Connection Issues
+1. Check if User ID and email are correct
+2. Confirm network connection is stable  
+3. Restart Claude Code
+4. Check if https://app.sumatman.ai website is accessible
 
-### 连接问题
-1. 检查用户ID和邮箱是否正确
-2. 确认网络连接正常  
-3. 重启Claude Code
-4. 检查 https://app.sumatman.ai 网站是否正常
+### Task Creation Failures
+1. **Most common**: story_type spelling error → Must use exact English names
+2. Check if credit balance is sufficient
+3. Confirm input_story parameter is not empty
+4. Check if parameter format is correct
 
-### 任务创建失败
-1. **最常见**：story_type拼写错误 → 必须使用精确的英文名称
-2. 检查积分余额是否充足
-3. 确认input_story参数不为空
-4. 检查参数格式是否正确
+### Parameter-Related Issues
+- **story_type error**: Must choose precisely from 13 options
+- **language mismatch**: Confirm voice_language is set correctly
+- **invalid duration**: Must be multiples of 5 (5-60 minutes)
+- **format error**: Must be landscape or portrait only
 
-### 参数相关问题
-- **story_type错误**：必须从13个选项中精确选择
-- **语言不匹配**：确认voice_language设置正确
-- **时长无效**：必须是5的倍数（5-60分钟）
-- **格式错误**：只能是landscape或portrait
+## 📞 Getting Help
 
-## 📞 获取帮助
+- **Technical Support**: Visit [https://app.sumatman.ai](https://app.sumatman.ai)  
+- **Documentation Updates**: Check project README files
+- **Community Support**: GitHub Issues
+- **Live Demo**: https://app.sumatman.ai
 
-- **技术支持**：访问 [https://app.sumatman.ai/developer](https://app.sumatman.ai/developer)  
-- **文档更新**：查看项目README文件
-- **社区支持**：GitHub Issues
-- **在线演示**：https://app.sumatman.ai
+## 🌟 Advanced Features
 
-## 🌟 高级功能
+### Comics Story Special Features
+When selecting `comics_story`, you can:
+- Use fixed characters throughout the entire storyline
+- Maintain consistent character appearance, perfect for serialized comic series
 
-### Comics Story特殊功能
-当选择`comics_story`时，你可以：
-- 使用固定角色贯穿整个故事情节
-- 角色形象保持一致，适合创建连载漫画系列
+**⚠️ Important: Character Image Upload Requirements**
+- **MCP interactions cannot directly upload images**
+- Must first upload character images in **Asset Management** at [https://app.sumatman.ai/asset-management](https://app.sumatman.ai/asset-management)
+- Name your characters during upload (e.g., "Super Hero")
+- In MCP conversations, simply provide the character name to reference them
+- Supported formats: PNG, JPG, recommend square images for best results
 
-**⚠️ 重要：角色图片上传要求**
-- **MCP交互中无法直接上传图片**
-- 必须先在 [https://app.sumatman.ai](https://app.sumatman.ai) 的 **Asset Management** 页面上传角色图片
-- 上传时为角色命名（如："Super Hero"）
-- 在MCP对话中只需提供角色名称即可调用
-- 支持的格式：PNG、JPG，建议使用方形图片以获得最佳效果
-
-### 自然语言灵活性
-对于AI可读字段，你可以：
-- 使用任何描述性语言
-- 组合多个风格元素
-- 创建独特的视觉效果
+### Natural Language Flexibility
+For AI readable fields, you can:
+- Use any descriptive language
+- Combine multiple style elements
+- Create unique visual effects
 
 ---
 
-**🎨 开始你的AI动画创作之旅！** ✨
+**🎨 Start your AI animation creation journey!** ✨
 
-*最后更新：2025年7月31日*
+*Last updated: July 31, 2025*
