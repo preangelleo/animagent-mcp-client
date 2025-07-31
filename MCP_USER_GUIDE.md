@@ -14,31 +14,21 @@ Sumatman AI Animation MCP Server 是**世界首个AI代理故事动画MCP服务�
 
 ### 步骤 2: 配置Claude Code
 
-**推荐方法（命令行）**：
+**推荐方法（使用本项目安装脚本）**：
 ```bash
-claude mcp add sumatman-ai-animation \
-  -e SUMATMAN_USER_ID=你的用户ID \
-  -e SUMATMAN_USER_EMAIL=你的邮箱地址 \
-  -- npx mcp-remote https://app.sumatman.ai/api/mcp
+# 克隆项目并运行自动安装
+git clone https://github.com/preangelleo/animagent-mcp-client.git
+cd animagent-mcp-client
+./install.sh  # macOS/Linux
+# 或 install.bat  # Windows
 ```
 
-**手动配置方法**：
-1. 打开 `~/.claude.json` 文件
-2. 在 `mcpServers` 部分添加：
-
-```json
-{
-  "mcpServers": {
-    "sumatman-ai-animation": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://app.sumatman.ai/api/mcp"],
-      "env": {
-        "SUMATMAN_USER_ID": "你的用户ID",
-        "SUMATMAN_USER_EMAIL": "你的邮箱地址"
-      }
-    }
-  }
-}
+**手动配置方法（如果使用mcp-remote）**：
+```bash
+claude mcp add animagent-mcp-client \
+  -e ANIMAGENT_USER_ID=你的用户ID \
+  -e ANIMAGENT_USER_EMAIL=你的邮箱地址 \
+  -- npx mcp-remote https://app.sumatman.ai/api/mcp
 ```
 
 ### 步骤 3: 验证连接
@@ -245,9 +235,15 @@ AI助手会选择：
 
 ### Comics Story特殊功能
 当选择`comics_story`时，你可以：
-- 上传固定角色的方形图片
-- 角色会贯穿整个故事情节
-- 适合创建连载漫画系列
+- 使用固定角色贯穿整个故事情节
+- 角色形象保持一致，适合创建连载漫画系列
+
+**⚠️ 重要：角色图片上传要求**
+- **MCP交互中无法直接上传图片**
+- 必须先在 [https://app.sumatman.ai](https://app.sumatman.ai) 的 **Asset Management** 页面上传角色图片
+- 上传时为角色命名（如："Super Hero"）
+- 在MCP对话中只需提供角色名称即可调用
+- 支持的格式：PNG、JPG，建议使用方形图片以获得最佳效果
 
 ### 自然语言灵活性
 对于AI可读字段，你可以：
