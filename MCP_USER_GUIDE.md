@@ -98,18 +98,27 @@ These parameters can be described using **natural language**, not limited to fix
 
 #### 5. 🎨 Illustration Style (ILLUSTRATION_STYLE)
 
-**Predefined Styles**:
-- "Epic Cinematic Matte Painting" - Epic cinematic style
-- "Stage Theatre Illustration" - Theatrical style
-- "Silk Scroll Miniature Painting" - Traditional silk scroll art
-- "Japanese Ghibli-inspired Style" - Studio Ghibli style (default)
-- "Silhouette Shadow Drama Style" - Shadow puppet style
-- "Mythological Chinese Painting" - Chinese mythology art
-- "Fantasy Realism with Chinese Elements" - Eastern fantasy realism
-- "Modern Cinematic Illustration" - Contemporary film illustration
+**Animation Styles (Recommended for Stories)**:
+- "3D Rendering" - 🎮 3D graphics
+- "Acrylic Painting" - 🎨 Traditional medium
+- "Anime Style" - 🌸 Japanese animation
+- "Chinese Ink Painting" - 🖌️ Traditional Chinese art
+- "Comic Book Style" - 💥 Comics art
+- "Hayao Miyazaki Style" - 🍃 Studio Ghibli aesthetic
+- "Japanese Ghibli-inspired Style" - 🌿 Studio Ghibli style (default)
+- "Japanese Woodblock" - 🌊 Ukiyo-e style
+- "Vector Art" - 🎯 Clean graphics
+- "Watercolor" - 💧 Fluid art style
 
-**Custom Styles**: Any GPT-recognizable art style
-- Examples: "watercolor style", "comic book style", "photorealistic style", "anime style"
+**Other Popular Styles**:
+- "Cinematic Realism" - 🎬 Movie quality
+- "Digital Painting" - 💻 Digital art
+- "Fantasy Art" - 🐉 Imaginative style
+- "Oil Painting" - 🖼️ Classic art
+- "Photorealistic" - 📷 Like real life
+
+**Custom Styles**: Any GPT-recognizable art style works!
+- View all 100+ styles with samples at: https://app.sumatman.ai/illustration-samples
 
 #### 6. 👶 Target Age (AUDIENCE_AGE)
 
