@@ -118,7 +118,7 @@ These parameters can be described using **natural language**, not limited to fix
 - "Photorealistic" - 📷 Like real life
 
 **Custom Styles**: Any GPT-recognizable art style works!
-- View all 100+ styles with samples at: https://app.sumatman.ai/illustration-samples
+- View all 18 styles with samples at: https://animagent.ai/illustration-styles
 
 #### 6. 👶 Target Age (AUDIENCE_AGE)
 

@@ -46,7 +46,7 @@ AnimAgent is the **world's first MCP server for AI-generated story animations**.
 
 - **🎭 13 Story Types**: Fairytales, Sci-Fi, Educational, Romance, Adventure, and more
 - **🌍 12 Languages**: English, Chinese, Spanish, French, Hindi, Arabic, and more
-- **🎨 100+ Art Styles**: Ghibli, Pixar, Watercolor, Oil Painting, Comic, and more
+- **🎨 18 Art Styles**: Ghibli, Pixar, Watercolor, Oil Painting, Comic, and more
 - **⏱️ Flexible Duration**: 5 to 60 minutes
 - **📱 Multiple Formats**: Landscape (16:9), Portrait (9:16), Square (1:1)
 - **🚀 Cloud-Based**: No GPU required, all processing in the cloud
@@ -168,7 +168,7 @@ suitable for teenagers, with Chinese narration"
 - **Modern Styles**: Digital Art, Vector Graphics, 3D Rendering
 - **Unique Styles**: Steampunk, Cyberpunk, Fantasy Art
 
-[View all 100+ styles with samples →](https://app.sumatman.ai/illustration-samples)
+[View all 18 styles with samples →](https://animagent.ai/illustration-styles)
 
 </details>
 
