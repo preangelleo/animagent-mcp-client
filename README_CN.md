@@ -258,8 +258,8 @@ graph LR
     B -->|HTTPS/JSON-RPC| C[AnimAgent 服务器]
     C -->|处理| D[AI 流水线]
     D --> E[GPT-4 故事]
-    D --> F[DALL-E 图像]
-    D --> G[ElevenLabs 语音]
+    D --> F[Flux/Qwen 图像]
+    D --> G[Volcengine/ElevenLabs 语音]
     D --> H[FFmpeg 视频]
     H -->|最终视频| I[用户仪表板]
 ```

@@ -258,8 +258,8 @@ graph LR
     B -->|HTTPS/JSON-RPC| C[AnimAgent Server]
     C -->|Process| D[AI Pipeline]
     D --> E[GPT-4 Story]
-    D --> F[DALL-E Images]
-    D --> G[ElevenLabs Voice]
+    D --> F[Flux/Qwen Images]
+    D --> G[Volcengine/ElevenLabs Voice]
     D --> H[FFmpeg Video]
     H -->|Final Video| I[User Dashboard]
 ```
