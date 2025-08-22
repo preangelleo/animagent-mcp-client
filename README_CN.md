@@ -250,6 +250,15 @@ npm run setup
 
 ---
 
+## 🏗️ 技术栈
+
+### AI 驱动组件
+
+- **📝 故事创作**：Google Gemini Pro 2.5 将您的想法转化为引人入胜的叙事和结构化故事线，为每个场景生成图像描述
+- **🎤 专业配音**：Volcano Engine 提供地道的中文语音生成，ElevenLabs 负责国际语音和字幕强制对齐
+- **🎨 视觉生成**：先进的 Flux Kontext Max 和 QWen 模型确保一致、精美的场景生成，并正确渲染文字
+- **🎬 视频处理**：CloudBurst Fargate 实现并行视频处理 - 无论场景数量多少都能快速渲染
+
 ## 🏗️ 架构
 
 ```mermaid
@@ -257,10 +266,10 @@ graph LR
     A[Claude Desktop] -->|MCP 协议| B[AnimAgent 客户端]
     B -->|HTTPS/JSON-RPC| C[AnimAgent 服务器]
     C -->|处理| D[AI 流水线]
-    D --> E[GPT-4 故事]
-    D --> F[Flux/Qwen 图像]
-    D --> G[Volcengine/ElevenLabs 语音]
-    D --> H[FFmpeg 视频]
+    D --> E[Gemini Pro 2.5 故事]
+    D --> F[Flux Kontext Max/QWen 图像]
+    D --> G[Volcano Engine/ElevenLabs 语音]
+    D --> H[CloudBurst Fargate 视频]
     H -->|最终视频| I[用户仪表板]
 ```
 

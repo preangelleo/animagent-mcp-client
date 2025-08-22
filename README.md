@@ -250,6 +250,15 @@ If automatic setup doesn't work, manually edit Claude's config:
 
 ---
 
+## 🏗️ Technology Stack
+
+### AI-Powered Components
+
+- **📝 Story Creation**: Google Gemini Pro 2.5 transforms your ideas into compelling narratives and structured storylines with image description for each scene
+- **🎤 Voice Acting**: Volcano Engine for authentic Chinese voice generation, ElevenLabs for international voices and subtitle force alignment  
+- **🎨 Visual Generation**: Advanced Flux Kontext Max and QWen models ensure consistent, beautiful scene generation with proper text rendering
+- **🎬 Video Processing**: CloudBurst Fargate enables parallel video processing - fast rendering regardless of the number of scenes
+
 ## 🏗️ Architecture
 
 ```mermaid
@@ -257,10 +266,10 @@ graph LR
     A[Claude Desktop] -->|MCP Protocol| B[AnimAgent Client]
     B -->|HTTPS/JSON-RPC| C[AnimAgent Server]
     C -->|Process| D[AI Pipeline]
-    D --> E[GPT-4 Story]
-    D --> F[Flux/Qwen Images]
-    D --> G[Volcengine/ElevenLabs Voice]
-    D --> H[FFmpeg Video]
+    D --> E[Gemini Pro 2.5 Story]
+    D --> F[Flux Kontext Max/QWen Images]
+    D --> G[Volcano Engine/ElevenLabs Voice]
+    D --> H[CloudBurst Fargate Video]
     H -->|Final Video| I[User Dashboard]
 ```
 
