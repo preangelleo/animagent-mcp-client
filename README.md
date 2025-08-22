@@ -1,194 +1,321 @@
 # AnimAgent MCP Client
 
-A client library for connecting to the AnimAgent MCP (Model Context Protocol) server to create and manage AI-powered story animations.
+<div align="center">
 
-## 🚀 Quick Install (One Command!)
+![AnimAgent Logo](https://app.sumatman.ai/assets/logos/animagent/animagent_ai.png)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
+[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io)
+[![Production Ready](https://img.shields.io/badge/Status-Production%20Ready-success)](https://app.sumatman.ai)
+
+**🎬 Create Professional AI-Powered Story Animations Directly from Claude Desktop**
+
+[English](README.md) | [中文](README_CN.md)
+
+</div>
+
+---
+
+## 🚀 One-Click Installation
 
 ### macOS/Linux:
 ```bash
-git clone https://github.com/preangelleo/animagent-mcp-client.git
-cd animagent-mcp-client
-./install.sh
+git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && ./install.sh
 ```
 
 ### Windows:
 ```cmd
-git clone https://github.com/preangelleo/animagent-mcp-client.git
-cd animagent-mcp-client
-install.bat
+git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && install.bat
 ```
 
-That's it! The installer will:
-- ✅ Check Node.js installation
-- ✅ Install dependencies
-- ✅ Ask for your credentials
-- ✅ Configure Claude Desktop automatically
+**That's it!** The installer automatically:
+- ✅ Checks Node.js installation
+- ✅ Installs all dependencies
+- ✅ Guides you through credential setup
+- ✅ Configures Claude Desktop for you
+- ✅ Verifies the connection
 
-## Overview
+---
 
-This project provides a lightweight passthrough client that bridges Claude Desktop with the AnimAgent remote MCP server. The client includes smart local validation to catch common errors before they reach the server.
+## 🌟 What is AnimAgent?
 
-**⚡ Enhanced with Client-Side Validation**: While maintaining the core passthrough design, the client now performs critical parameter validation for edit, repeat, and delete operations. This provides instant feedback and prevents common user errors, while still keeping all business logic on the server side.
+AnimAgent is the **world's first MCP server for AI-generated story animations**. Transform your ideas into professional animated videos through natural conversation with Claude Desktop - no video editing skills required!
 
-It enables users to:
+### ✨ Key Features
 
-- Create AI-generated story animations
-- Monitor task status and progress  
-- Edit, repeat, and delete animation tasks with smart validation
-- Get instant error feedback for missing required parameters
-- Integrate animation capabilities into Claude Desktop or other MCP-compatible environments
+- **🎭 13 Story Types**: Fairytales, Sci-Fi, Educational, Romance, Adventure, and more
+- **🌍 12 Languages**: English, Chinese, Spanish, French, Hindi, Arabic, and more
+- **🎨 100+ Art Styles**: Ghibli, Pixar, Watercolor, Oil Painting, Comic, and more
+- **⏱️ Flexible Duration**: 5 to 60 minutes
+- **📱 Multiple Formats**: Landscape (16:9), Portrait (9:16), Square (1:1)
+- **🚀 Cloud-Based**: No GPU required, all processing in the cloud
+- **💬 Natural Language**: Just describe what you want in plain English
 
-## Prerequisites
 
-- Node.js 18+ installed
-- A valid AnimAgent account with:
-  - User ID
-  - User Email
-- Claude Desktop (for MCP integration)
+---
 
-## Quick Start
+## 🎯 Quick Start Guide
 
-### 1. Clone the Repository
+### Step 1: Get Your Credentials (2 minutes)
+
+1. **Register** at [app.sumatman.ai](https://app.sumatman.ai)
+2. **Login** with your email
+3. **Copy** your User ID from the Welcome page
+4. **Remember** your email address
+
+### Step 2: Install the Client (1 minute)
+
+Run the one-click installer above, or manually:
 
 ```bash
+# Clone and install
 git clone https://github.com/preangelleo/animagent-mcp-client.git
 cd animagent-mcp-client
-```
-
-### 2. Install Dependencies
-
-```bash
 npm install
-```
 
-### 3. Configure Environment
-
-Copy the example environment file and add your credentials:
-
-```bash
+# Configure credentials
 cp .env.example .env
-```
+# Edit .env with your User ID and Email
 
-Edit `.env` and add your AnimAgent credentials:
-```
-ANIMAGENT_USER_ID=your_user_id_here
-ANIMAGENT_USER_EMAIL=your_email_here
-```
-
-**Where to find your credentials:**
-- **Email**: The email you use to log in to https://app.sumatman.ai
-- **User ID**: After logging in to https://app.sumatman.ai, you can find and copy your User ID from the dashboard
-
-### 4. First-Time Setup
-
-Run the setup script to configure Claude Desktop:
-
-```bash
+# Setup Claude Desktop
 npm run setup
 ```
 
-This will automatically configure your Claude Desktop to connect with the AnimAgent MCP server.
+### Step 3: Start Creating! (Instant)
 
-
-## Usage
-
-
-### With Claude Desktop
-
-Once configured, you can use natural language in Claude Desktop:
+In Claude Desktop, simply type:
 
 ```
-"Create a 30-second animation about a magical forest adventure"
-"Check the status of my animation task"
+"Create a 10-minute fairytale about a brave mouse discovering magical cheese"
 ```
 
+---
 
-## How It Works
+## 💬 Usage Examples
 
-This client acts as a bridge between Claude Desktop and the AnimAgent MCP server. When you use animation commands in Claude:
+### Basic Creation
+```
+"Create a children's story about friendship"
+```
 
-1. Claude Desktop sends the request to this local client via MCP protocol
-2. **⚡ NEW**: Client performs local validation for critical parameters (edit/repeat/delete operations)
-3. If validation passes, the client forwards the request to the AnimAgent server
-4. The server processes the animation task
-5. Results are returned back through the same chain
+### With Full Customization
+```
+"Create a 15-minute sci-fi adventure in Japanese anime style, 
+suitable for teenagers, with Chinese narration"
+```
 
-**Dual-Layer Validation**: 
-- **Client-Side**: Catches missing `task_id` parameters instantly with helpful error messages
-- **Server-Side**: Handles business logic validation (task status, permissions, etc.)
+### Task Management
+```
+"Show me the status of my animation task"
+"Edit task web_123_abc to change duration to 20 minutes"
+"Repeat my last task but with a different story"
+```
 
-**Note**: All tool definitions and business parameters are still defined by the server. The client only validates critical required fields.
+---
 
-## Troubleshooting
+## 🛠️ Available Commands
 
-### Client Validation Errors ⚡ New
+| Command | Description | Example |
+|---------|-------------|---------|
+| **create_animation_task** | Create new animation | "Create a story about..." |
+| **get_task_details** | Check task status | "Show task web_123_abc" |
+| **edit_animation_task** | Modify pending task | "Edit task to change..." |
+| **repeat_animation_task** | Create variation | "Repeat task with new story" |
+| **delete_animation_task** | Remove pending task | "Delete task web_123_abc" |
 
-**"❌ Client Validation Error - TASK_ID IS MANDATORY"**
-- **Cause**: Trying to edit, repeat, or delete a task without providing the `task_id` parameter
-- **Solution**: Always use `get_task_details` first to find the task ID, then provide it in your request
-- **Example**: 
-  ```
-  "First, check my task details for task_id: web_1234567890_abc123"
-  "Now edit that task to change the story to: [new story content]"
-  ```
+---
 
-### Connection Issues
-- Ensure your credentials in `.env` are correct
-- Check your internet connection
-- Verify the MCP server is accessible
+## 🎨 Customization Options
 
-### Claude Desktop Integration
-- Make sure Claude Desktop is properly installed
-- Run `npm run setup` again if configuration issues persist
-- Check Claude Desktop logs for MCP connection errors
+<details>
+<summary><b>📚 Story Types (13 options)</b></summary>
 
-### Advanced Troubleshooting
+- `fairytale_story` - Magical fairytales
+- `educational_story` - Learning content
+- `historical_story` - Historical events
+- `sci_fi_story` - Science fiction
+- `fantasy_story` - Fantasy worlds
+- `adventure_story` - Epic adventures
+- `romantic_story` - Love stories
+- `cinematic_story` - Movie-style
+- `bible_story` - Biblical stories
+- `poetry_story` - Poetic narratives
+- `lyric_story` - Musical stories
+- `comics_story` - Comic book style
+- `book_story` - Book adaptations
 
-**Local vs Server Errors**:
-- **Client errors** (⚡): Show "Client Validation Error" - these are caught locally
-- **Server errors**: Show "Backend Error" - these come from the remote server
-- **Network errors**: Show "Connection Error" - these indicate connectivity issues
+</details>
 
-## Contributing
+<details>
+<summary><b>🎨 Popular Art Styles</b></summary>
 
-Contributions are welcome! Please:
+- **Animation Styles**: Ghibli, Pixar, Disney, Anime
+- **Traditional Art**: Oil Painting, Watercolor, Chinese Ink
+- **Modern Styles**: Digital Art, Vector Graphics, 3D Rendering
+- **Unique Styles**: Steampunk, Cyberpunk, Fantasy Art
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+[View all 100+ styles with samples →](https://app.sumatman.ai/illustration-samples)
 
-## License
+</details>
 
-MIT License - see LICENSE file for details
+<details>
+<summary><b>🌍 Supported Languages</b></summary>
 
-## Support
+English, Chinese, Spanish, French, Hindi, Arabic, Bengali, Portuguese, Russian, Japanese, German, Korean
 
-For issues and questions:
-- GitHub Issues: [Create an issue](https://github.com/preangelleo/animagent-mcp-client/issues)
-- Email: atmansum@gmail.com
-- Website: https://app.sumatman.ai
+</details>
 
-## Features
+---
 
-### ⚡ Smart Local Validation (v2.1.0)
-- **Instant Error Detection**: Catches missing `task_id` parameters before sending requests
-- **Helpful Error Messages**: Provides clear usage examples and troubleshooting tips
-- **Reduced Network Traffic**: Invalid requests blocked locally, saving bandwidth
-- **Better User Experience**: No waiting for server roundtrips on obvious errors
+## 🔧 Advanced Configuration
 
-### 🔧 Parameter Mapping Fix (Latest Update)
-- **Fully Working Edit Operations**: Edit, repeat, and delete functions now work correctly
-- **Fixed Parameter Mapping**: Resolved backend parameter name mapping issues
-- **Reliable Task Management**: All task operations (create/edit/repeat/delete) fully functional
-- **Consistent Behavior**: Same parameter handling across all operation modes
+### Manual Claude Desktop Setup
 
-### 🔄 Pure Passthrough Design
-- **Server-First Architecture**: All business logic and tool definitions from server
-- **Automatic Updates**: New server features available without client updates
-- **Dual-Layer Validation**: Client validates required fields, server handles business logic
+If automatic setup doesn't work, manually edit Claude's config:
 
-## Powered By
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-This client connects to the AnimAgent service by [Sumatman AI](https://app.sumatman.ai), bringing AI-powered story animation capabilities to developers worldwide.
+```json
+{
+  "mcpServers": {
+    "animagent": {
+      "command": "node",
+      "args": ["/path/to/animagent-mcp-client/src/index.js"],
+      "env": {
+        "ANIMAGENT_USER_ID": "your-user-id",
+        "ANIMAGENT_USER_EMAIL": "your-email@example.com"
+      }
+    }
+  }
+}
+```
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `ANIMAGENT_USER_ID` | Your user ID from app.sumatman.ai | ✅ Yes |
+| `ANIMAGENT_USER_EMAIL` | Your registered email | ✅ Yes |
+| `ANIMAGENT_MCP_SERVER_URL` | Server URL (default: https://app.sumatman.ai/api/mcp) | ❌ No |
+| `DEBUG` | Enable debug logging | ❌ No |
+
+---
+
+## 🚨 Troubleshooting
+
+### Common Issues & Solutions
+
+<details>
+<summary><b>❌ "Client Validation Error - TASK_ID IS MANDATORY"</b></summary>
+
+**Solution**: Always provide the task ID when editing/repeating/deleting:
+```
+✅ "Edit task web_123_abc to change duration"
+❌ "Edit my task to change duration"
+```
+
+</details>
+
+<details>
+<summary><b>❌ "User credentials not configured"</b></summary>
+
+**Solution**:
+1. Check your `.env` file has correct credentials
+2. Verify User ID matches the one from app.sumatman.ai
+3. Restart Claude Desktop after changes
+
+</details>
+
+<details>
+<summary><b>❌ "Connection refused" or timeout errors</b></summary>
+
+**Solution**:
+1. Check internet connection
+2. Verify https://app.sumatman.ai is accessible
+3. Try `npm run test` to test connection
+4. Check firewall/proxy settings
+
+</details>
+
+---
+
+## 💰 Pricing
+
+- **Credit System**: 50 credits per minute of video
+- **Free Trial**: 100 credits on signup
+- **Packages**: From $1 (10 credits) to $500 (7,000 credits)
+- **View Balance**: [app.sumatman.ai/credits](https://app.sumatman.ai/credits)
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+graph LR
+    A[Claude Desktop] -->|MCP Protocol| B[AnimAgent Client]
+    B -->|HTTPS/JSON-RPC| C[AnimAgent Server]
+    C -->|Process| D[AI Pipeline]
+    D --> E[GPT-4 Story]
+    D --> F[DALL-E Images]
+    D --> G[ElevenLabs Voice]
+    D --> H[FFmpeg Video]
+    H -->|Final Video| I[User Dashboard]
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+```bash
+# Fork and clone
+git clone https://github.com/YOUR_USERNAME/animagent-mcp-client.git
+
+# Create feature branch
+git checkout -b feature/amazing-feature
+
+# Commit changes
+git commit -m 'Add amazing feature'
+
+# Push and create PR
+git push origin feature/amazing-feature
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🆘 Support
+
+- **Website**: [app.sumatman.ai](https://app.sumatman.ai)
+- **GitHub Issues**: [Report a bug](https://github.com/preangelleo/animagent-mcp-client/issues)
+- **Email**: support@sumatman.ai
+
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Model Context Protocol](https://modelcontextprotocol.io) by Anthropic
+- Powered by [Sumatman AI](https://animagent.ai)
+- Special thanks to all our early adopters and contributors
+
+---
+
+<div align="center">
+
+**⭐ Star us on GitHub if you find this useful!**
+
+[🌟 Star](https://github.com/preangelleo/animagent-mcp-client) · 
+[🐛 Report Bug](https://github.com/preangelleo/animagent-mcp-client/issues) · 
+[💡 Request Feature](https://github.com/preangelleo/animagent-mcp-client/issues)
+
+Made with ❤️ by [Sumatman AI](https://animagent.ai)
+
+</div>
