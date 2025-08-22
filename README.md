@@ -105,6 +105,11 @@ In Claude Desktop, simply type:
 suitable for teenagers, with Chinese narration"
 ```
 
+### With Advanced Options
+```
+"Create an educational story with subtitles and zoom effects enabled"
+```
+
 ### Task Management
 ```
 "Show me the status of my animation task"
@@ -123,6 +128,14 @@ suitable for teenagers, with Chinese narration"
 | **edit_animation_task** | Modify pending task | "Edit task to change..." |
 | **repeat_animation_task** | Create variation | "Repeat task with new story" |
 | **delete_animation_task** | Remove pending task | "Delete task web_123_abc" |
+
+### 🎬 Advanced Video Options (v2.2.0)
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| **enable_subtitle** | Boolean | false | Add synchronized subtitles to your video |
+| **enable_zoom_effect** | Boolean | false | Add cinematic zoom in/out effects for dynamic visuals |
+| **watermark_enabled** | Boolean | false | Add custom watermark (requires upload at app.sumatman.ai) |
 
 ---
 

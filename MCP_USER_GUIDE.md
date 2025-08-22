@@ -145,6 +145,26 @@ These parameters can be described using **natural language**, not limited to fix
 **Natural Language**:
 - "medieval European style", "modern Asian style", "traditional African style", etc.
 
+### 🎬 Advanced Video Options (New!)
+
+#### 9. 📝 Subtitles (ENABLE_SUBTITLE)
+- **Type**: Boolean (true/false)
+- **Default**: false
+- **Description**: Enable synchronized subtitles in the video
+- **Note**: Subtitles will be automatically generated and timed with the narration
+
+#### 10. 🎥 Zoom Effects (ENABLE_ZOOM_EFFECT)
+- **Type**: Boolean (true/false)
+- **Default**: false
+- **Description**: Add cinematic zoom in/out effects to images
+- **Note**: Makes static images more dynamic and engaging
+
+#### 11. 💧 Watermark (WATERMARK_ENABLED)
+- **Type**: Boolean (true/false)
+- **Default**: false
+- **Description**: Add your custom watermark to the video
+- **⚠️ Important**: You must first upload a watermark image for your story type at [app.sumatman.ai/asset-management](https://app.sumatman.ai/asset-management)
+
 ## 📝 Usage Examples
 
 ### Example 1: Basic Animation Creation
@@ -172,7 +192,18 @@ AI assistant confirms parameters:
 - Target audience: "teenagers"
 ```
 
-### Example 3: Comics Character Story
+### Example 3: With Advanced Options
+```
+User: "Create an educational story with subtitles and zoom effects"
+
+AI assistant confirms parameters:
+- Story type: educational_story
+- Enable subtitles: true
+- Enable zoom effects: true
+- Watermark: false (unless user has uploaded one)
+```
+
+### Example 4: Comics Character Story
 ```
 User: "Create a comic story using my character"
 
