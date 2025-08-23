@@ -1,4 +1,4 @@
-# AnimAgent MCP 客户端
+# AnimAgent MCP 服务器
 
 <div align="center">
 
@@ -21,12 +21,12 @@
 
 ### macOS/Linux:
 ```bash
-git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && ./install.sh
+git clone https://github.com/preangelleo/animagent-mcp-server.git && cd animagent-mcp-server && ./install.sh
 ```
 
 ### Windows:
 ```cmd
-git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && install.bat
+git clone https://github.com/preangelleo/animagent-mcp-server.git && cd animagent-mcp-server && install.bat
 ```
 
 **就这么简单！** 安装程序会自动：
@@ -70,8 +70,8 @@ AnimAgent 是**全球首个 AI 生成故事动画的 MCP 服务器**。通过与
 
 ```bash
 # 克隆并安装
-git clone https://github.com/preangelleo/animagent-mcp-client.git
-cd animagent-mcp-client
+git clone https://github.com/preangelleo/animagent-mcp-server.git
+cd animagent-mcp-server
 npm install
 
 # 配置凭据
@@ -195,7 +195,7 @@ npm run setup
   "mcpServers": {
     "animagent": {
       "command": "node",
-      "args": ["/path/to/animagent-mcp-client/src/index.js"],
+      "args": ["/path/to/animagent-mcp-server/src/index.js"],
       "env": {
         "ANIMAGENT_USER_ID": "您的用户ID",
         "ANIMAGENT_USER_EMAIL": "您的邮箱@example.com"
@@ -294,7 +294,7 @@ graph LR
 
 ```bash
 # Fork 并克隆
-git clone https://github.com/YOUR_USERNAME/animagent-mcp-client.git
+git clone https://github.com/YOUR_USERNAME/animagent-mcp-server.git
 
 # 创建功能分支
 git checkout -b feature/amazing-feature
@@ -317,7 +317,7 @@ git push origin feature/amazing-feature
 ## 🆘 支持
 
 - **官网**：[app.sumatman.ai](https://app.sumatman.ai)
-- **GitHub Issues**：[报告错误](https://github.com/preangelleo/animagent-mcp-client/issues)
+- **GitHub Issues**：[报告错误](https://github.com/preangelleo/animagent-mcp-server/issues)
 - **邮箱**：support@sumatman.ai
 
 ---
@@ -334,9 +334,9 @@ git push origin feature/amazing-feature
 
 **⭐ 如果您觉得有用，请在 GitHub 上给我们星标！**
 
-[🌟 星标](https://github.com/preangelleo/animagent-mcp-client) · 
-[🐛 报告错误](https://github.com/preangelleo/animagent-mcp-client/issues) · 
-[💡 请求功能](https://github.com/preangelleo/animagent-mcp-client/issues)
+[🌟 星标](https://github.com/preangelleo/animagent-mcp-server) · 
+[🐛 报告错误](https://github.com/preangelleo/animagent-mcp-server/issues) · 
+[💡 请求功能](https://github.com/preangelleo/animagent-mcp-server/issues)
 
 由 [Sumatman AI](https://animagent.ai) 用 ❤️ 制作
 

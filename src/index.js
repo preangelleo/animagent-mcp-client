@@ -35,7 +35,7 @@ function debug(...args) {
 // MCP Server instance
 const server = new Server(
   {
-    name: 'animagent-mcp-client',
+    name: 'animagent-mcp-server',
     version: '1.0.0',
   },
   {

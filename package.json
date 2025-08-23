@@ -1,7 +1,7 @@
 {
-  "name": "animagent-mcp-client",
+  "name": "animagent-mcp-server",
   "version": "1.0.0",
-  "description": "A client library for connecting to the AnimAgent MCP server to create and manage AI-powered story animations",
+  "description": "MCP server bridge for connecting to AnimAgent's story animation API - enables LLMs to create and manage AI-powered story animations",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
@@ -22,12 +22,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/animagent-mcp-client.git"
+    "url": "https://github.com/preangelleo/animagent-mcp-server.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/animagent-mcp-client/issues"
+    "url": "https://github.com/preangelleo/animagent-mcp-server/issues"
   },
-  "homepage": "https://github.com/yourusername/animagent-mcp-client#readme",
+  "homepage": "https://github.com/preangelleo/animagent-mcp-server#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "dotenv": "^16.4.5",

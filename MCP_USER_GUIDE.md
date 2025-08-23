@@ -18,8 +18,8 @@ The Animagent MCP Server is the **world's first AI agent MCP server for story an
 **Recommended Method (Using Project Installer)**:
 ```bash
 # Clone the project and run automatic installation
-git clone https://github.com/preangelleo/animagent-mcp-client.git
-cd animagent-mcp-client
+git clone https://github.com/preangelleo/animagent-mcp-server.git
+cd animagent-mcp-server
 ./install.sh  # macOS/Linux
 # or install.bat  # Windows
 ```

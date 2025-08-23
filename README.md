@@ -1,4 +1,4 @@
-# AnimAgent MCP Client
+# AnimAgent MCP Server
 
 <div align="center">
 
@@ -21,12 +21,12 @@
 
 ### macOS/Linux:
 ```bash
-git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && ./install.sh
+git clone https://github.com/preangelleo/animagent-mcp-server.git && cd animagent-mcp-server && ./install.sh
 ```
 
 ### Windows:
 ```cmd
-git clone https://github.com/preangelleo/animagent-mcp-client.git && cd animagent-mcp-client && install.bat
+git clone https://github.com/preangelleo/animagent-mcp-server.git && cd animagent-mcp-server && install.bat
 ```
 
 **That's it!** The installer automatically:
@@ -70,8 +70,8 @@ Run the one-click installer above, or manually:
 
 ```bash
 # Clone and install
-git clone https://github.com/preangelleo/animagent-mcp-client.git
-cd animagent-mcp-client
+git clone https://github.com/preangelleo/animagent-mcp-server.git
+cd animagent-mcp-server
 npm install
 
 # Configure credentials
@@ -195,7 +195,7 @@ If automatic setup doesn't work, manually edit Claude's config:
   "mcpServers": {
     "animagent": {
       "command": "node",
-      "args": ["/path/to/animagent-mcp-client/src/index.js"],
+      "args": ["/path/to/animagent-mcp-server/src/index.js"],
       "env": {
         "ANIMAGENT_USER_ID": "your-user-id",
         "ANIMAGENT_USER_EMAIL": "your-email@example.com"
@@ -294,7 +294,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ```bash
 # Fork and clone
-git clone https://github.com/YOUR_USERNAME/animagent-mcp-client.git
+git clone https://github.com/YOUR_USERNAME/animagent-mcp-server.git
 
 # Create feature branch
 git checkout -b feature/amazing-feature
@@ -317,7 +317,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 - **Website**: [app.sumatman.ai](https://app.sumatman.ai)
-- **GitHub Issues**: [Report a bug](https://github.com/preangelleo/animagent-mcp-client/issues)
+- **GitHub Issues**: [Report a bug](https://github.com/preangelleo/animagent-mcp-server/issues)
 - **Email**: support@sumatman.ai
 
 ---
@@ -334,9 +334,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ Star us on GitHub if you find this useful!**
 
-[🌟 Star](https://github.com/preangelleo/animagent-mcp-client) · 
-[🐛 Report Bug](https://github.com/preangelleo/animagent-mcp-client/issues) · 
-[💡 Request Feature](https://github.com/preangelleo/animagent-mcp-client/issues)
+[🌟 Star](https://github.com/preangelleo/animagent-mcp-server) · 
+[🐛 Report Bug](https://github.com/preangelleo/animagent-mcp-server/issues) · 
+[💡 Request Feature](https://github.com/preangelleo/animagent-mcp-server/issues)
 
 Made with ❤️ by [Sumatman AI](https://animagent.ai)
 
